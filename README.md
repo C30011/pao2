@@ -10,11 +10,29 @@ def Menu_Principal():
     print('3 - Cancelar Reserva')
     print('4 - Caucular Estatistica ')
     print('5 - Sair')
+    
 def Cadastrar_Reserva ():
     print('Vamos Cadastrar sua Reserva!')
+
     Nome_Responsavel = input('Digite o seu Nome:')
-    Data_Checkout = datetime(input('Digite a Data de Checkout:'))
-    Data_Checkin = datetime(input('Digite a Data de Checkin:'))
+
+    while True:
+        try:
+            Checkin = datetime.strptime(input("Check-in (dd/mm/aaaa): "), "%d/%m/%Y")
+        except ValueError:
+            print('Data de Checkin inválida.')
+            continue
+        try:
+            Checkout = datetime.strptime(input("Check-out (dd/mm/aaaa): "), "%d/%m/%Y")
+        except ValueError:
+            print('Data de Checkout inválida.')
+            continue
+        if Checkout <= Checkin: 
+            print("Check-out inválido."); 
+            continue
+
+        Tipo_De_Quarto = input('Digite o tipo de quarto (Standard,Premium,Luxo):')
+
 
 def Listar_Reservas ():
     print(' Ok, Vamos Listar Sua Reserva ')
@@ -30,11 +48,7 @@ def Caucular_Estatistica():
 
 def Sair():
     print('Ok, Iremos Retirar o programa')
+def main():
+    Menu_Principal()
+Menu_Principal()
 
-
-
-
-
-
-
-                       
