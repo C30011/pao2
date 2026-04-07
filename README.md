@@ -1,65 +1,62 @@
-from datetime import datetime
-import os    
 import sys
-import time
-disponivel = {"Standard": 10, "Premium": 5, "Luxo": 3}
-total_reservas = soma_valores = maior_valor = maior_dias = 0
-resp_maior_valor = resp_maior_duracao = ""
+valor_reserva = 0
 
-def mostrar_menu():
-    print("1 - Cadastrar nova reserva")
-    print("2 - Carregar reservas já existentes")
-    print("3 - Consultar reservas ")
-    print("4 - Cancelar reservas")
-    print("5 - Listar todas as reservas")
-    print("6 - Exibir estatìsticas gerais")
+nome = input("\nNome do responsável: ")
 
-def main():
-    while (True):
-        mostrar_menu()
-        opcao=int(input("Digite a opção desejada:"))
-        if opcao== 1:
-            Cadastrar_Reserva()
-        elif opcao == 2:
-            Carregar_reservas()
-        elif opcao == 3:
-            consultar_reservas()
-        elif opcao == 4:
-            cancelar_reservas()
-        elif opcao == 5:
-            listar_reservas()
-        elif opcao == 6:
-            exibir_estatisticas()
-        elif opcao==7:
-            print("Saindo..")
-            time.sleep(3)
-            continue
-        time.sleep(3)
-        os.system("clear")
-main()
-           
+checkout_dia = int(input("Digite o dia de Checkout:"))
 
-def Cadastrar_Reserva ():
-    print('Ok, Vamos Cadastrar sua Reserva!')
-    while True:
-        nome = input("\nNome do responsável: ")
-        if not nome:
-                print("Nome inválido.")
-        break
-    while True:
-        try:
-            Checkin = datetime.strptime(input("Check-in (dd/mm/aaaa): "), "%d/%m/%Y")
-        except ValueError:
-            print('Data de Checkin inválida.')
-            continue
-        try:
-            Checkout = datetime.strptime(input("Check-out (dd/mm/aaaa): "), "%d/%m/%Y")
-            if Checkout <= Checkin: 
-                print("Check-out inválido."); 
-        except ValueError:
-            print('Data de Checkout inválida.')
-        continue
-    While True:
-        Tipo_de_Quarto = input('Digite o tipo de Quarto (Standard, Premium, Luxo):')
+if checkout_dia > 30:
+    print('Data invalida!')
+    sys.exit()
 
- 
+checkout_mes = int(input("Digite o mes de Checkout:"))
+
+if checkout_mes > 12:
+    print('Data invalida!')
+    sys.exit()
+
+checkout_ano = int(input("Digite o ano de Checkout:"))
+
+checkin_dia = int(input("Digite o dia de Checkin:"))
+
+if checkin_dia > 30:
+    print('Data invalida!')
+    sys.exit()
+
+checkin_mes = int(input("Digite o mes de Checkin:"))
+
+if checkin_mes > 12:
+    print('Data invalida!')
+    sys.exit()
+checkin_ano = int(input("Digite o ano de Checkin:"))
+
+if checkin_dia > checkout_dia and checkin_mes == checkout_mes and checkin_ano == checkout_ano:
+    print('Data invalida!')
+    sys.exit()
+elif checkin_dia == checkout_dia and checkin_mes > checkout_mes and checkin_ano == checkout_ano:
+    print('Data invalida!')
+    sys.exit()
+elif checkin_dia == checkout_dia and checkin_mes == checkout_mes and checkin_ano == checkout_ano:
+    print('Data invalida!')
+    sys.exit()
+Dias = checkin_dia + checkout_dia
+meses = checkin_mes checkout_mes
+
+Quantidade_Quartos = int(input('Digite a quantidade de Quartos:'))
+tipo_Quarto = input('Digite o tipo de quarto (Pataxó,Ancestra,Descobrimento):')
+
+if tipo_Quarto == 'Pataxó':
+    valor_reserva = 100 * Total_Dias * Quantidade_Quartos
+elif tipo_Quarto == 'Ascestra':
+    valor_reserva = 180 * Total_Dias * Quantidade_Quartos
+elif tipo_Quarto == 'Descobrimento':
+    valor_reserva = 250 * Total_Dias * Quantidade_Quartos
+else:
+    print("Tipo de Quarto invalido.")
+    sys.exit()
+
+
+print(f'O Tipo de quarto é {tipo_Quarto}')
+print(f'')
+    
+
